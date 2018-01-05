@@ -448,7 +448,7 @@ PrivetHandler::~PrivetHandler() {
 
 void PrivetHandler::OnTraitDefsChanged() {
   ++traits_fingerprint_;
-  auto pred = [this](const UpdateRequestParameters& params) {
+  auto pred = [](const UpdateRequestParameters& params) {
     return params.traits_fingerprint == 0;
   };
   auto last =
@@ -462,7 +462,7 @@ void PrivetHandler::OnStateChanged() {
   // State updates also change the component tree, so update both fingerprints.
   ++state_fingerprint_;
   ++components_fingerprint_;
-  auto pred = [this](const UpdateRequestParameters& params) {
+  auto pred = [](const UpdateRequestParameters& params) {
     return params.state_fingerprint == 0 && params.components_fingerprint == 0;
   };
   auto last =
@@ -474,7 +474,7 @@ void PrivetHandler::OnStateChanged() {
 
 void PrivetHandler::OnComponentTreeChanged() {
   ++components_fingerprint_;
-  auto pred = [this](const UpdateRequestParameters& params) {
+  auto pred = [](const UpdateRequestParameters& params) {
     return params.components_fingerprint == 0;
   };
   auto last =
